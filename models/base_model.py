@@ -4,7 +4,7 @@ Creates a base class for future use
 """
 import uuid
 import datetime
-
+import models 
 
 class BaseModel:
     """
@@ -23,6 +23,7 @@ class BaseModel:
         self.id = str(uuid.uuid4())
         self.created_at = datetime.datetime.now()
         self.updated_at = datetime.datetime.now()
+        models.storage.new(self)
 
     def save(self):
         """
@@ -30,6 +31,7 @@ class BaseModel:
         :return: Nothing
         """
         self.updated_at = datetime.datetime.now()
+        models.storage.save()
 
     def __str__(self):
         """
