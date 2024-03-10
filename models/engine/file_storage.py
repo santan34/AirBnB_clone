@@ -41,21 +41,21 @@ class FileStorage:
             json.dump(ser_dict, f)
 
     def reload(self):
-        if not os.path.exists(self.__filepath):
+        """
+        deserializes the JSON file and loads our object
+        """
+        current_classes = {'BaseModel': BaseModel}
+        if not os.path.exists(FileStorage.__filepath):
             return
-        with open(self.__filepath, "r") as file:
-            classmap = {"BaseModel": BaseModel}
+        with open(FileStorage.__filepath, 'r') as f:
             obj = None
             try:
-                obj = json.load(file)
+                obj = json.load(f)
             except json.JSONDecodeError:
                 pass
             if obj is None:
-                pass
-            else:
-                for key, val in obj.items():
-                    classname, obj_id = key.split(".")
-                    if classname in classmap:
-                        obj_class = classmap[classname]
-                        object = obj_class(**val)
-                        self.__objects[key] = object
+                return
+            FileStorage.__objects = {
+                    k: current_classes[k.split('.')[0]](**v)
+                    for k, v in obj.items()
+                    }
