@@ -45,7 +45,9 @@ class FileStorage:
         """
         deserializes the JSON file and loads our object
         """
-        current_classes = {'BaseModel': BaseModel, 'User': User}
+        current_classes = {'BaseModel': BaseModel, 'User': User,
+                'Amenity': Amenity, 'City': City, 'State': State,
+                'Place': Place, 'Review': Review}
         if not os.path.exists(FileStorage.__filepath):
             return
         with open(FileStorage.__filepath, 'r') as f:
