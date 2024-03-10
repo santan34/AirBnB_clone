@@ -4,7 +4,8 @@ Creates a base class for future use
 """
 import uuid
 import datetime
-import models 
+import models
+
 
 class BaseModel:
     """

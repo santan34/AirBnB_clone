@@ -1,14 +1,16 @@
 #!/usr/bin/python3
-import cmd
 """
 A console for our cli
 """
+import cmd
+
 
 class HBNBCommand(cmd.Cmd):
     """
     A class for our console
     """
     prompt = '(hbnb) '
+
     def do_EOF(self, line):
         """
         instruction for end of file
@@ -23,6 +25,7 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         pass
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
