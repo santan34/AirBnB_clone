@@ -2,6 +2,7 @@
 import json
 import os
 from models.base_model import BaseModel
+from models.user import User
 
 """
 creates a file stroage class engine
@@ -44,7 +45,7 @@ class FileStorage:
         """
         deserializes the JSON file and loads our object
         """
-        current_classes = {'BaseModel': BaseModel}
+        current_classes = {'BaseModel': BaseModel, 'User': User}
         if not os.path.exists(FileStorage.__filepath):
             return
         with open(FileStorage.__filepath, 'r') as f:
