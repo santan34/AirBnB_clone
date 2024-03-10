@@ -19,7 +19,7 @@ class FileStorage:
     A class that will serve as the storage engine for our project
     """
     __filepath = "file.json"
-    __objects:dict = {}
+    __objects: dict = {}
 
     def all(self):
         """
@@ -51,8 +51,8 @@ class FileStorage:
         deserializes the JSON file and loads our object
         """
         current_classes = {'BaseModel': BaseModel, 'User': User,
-                'Amenity': Amenity, 'City': City, 'State': State,
-                'Place': Place, 'Review': Review}
+                           'Amenity': Amenity, 'City': City, 'State': State,
+                           'Place': Place, 'Review': Review}
         if not os.path.exists(FileStorage.__filepath):
             return
         with open(FileStorage.__filepath, 'r') as f:
@@ -64,6 +64,6 @@ class FileStorage:
             if obj is None:
                 return
             FileStorage.__objects = {
-                    k: current_classes[k.split('.')[0]](**v)
-                    for k, v in obj.items()
-                    }
+                k: current_classes[k.split('.')[0]](**v)
+                for k, v in obj.items()
+            }
