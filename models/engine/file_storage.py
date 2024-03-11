@@ -26,7 +26,7 @@ class FileStorage:
         Returns all the objetcs
         :return: self__.objects
         """
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """
@@ -35,15 +35,15 @@ class FileStorage:
         :return:
         """
         key = f"{obj.__class__.__name__}.{obj.id}"
-        self.__objects[key] = obj
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """
         Save  our __objects to a json
         :return: nothing
         """
-        ser_dict = {k: v.to_dict() for k, v in self.__objects.items()}
-        with open(self.__filepath, "w") as f:
+        ser_dict = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
+        with open(FileStorage.__filepath, "w") as f:
             json.dump(ser_dict, f)
 
     def reload(self):
