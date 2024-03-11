@@ -17,6 +17,7 @@ current_classes = {'BaseModel': BaseModel, 'User': User,
                    'Amenity': Amenity, 'City': City, 'State': State,
                    'Place': Place, 'Review': Review}
 
+
 def validated(arguments):
     """
     validates arguments during create
@@ -28,6 +29,7 @@ def validated(arguments):
         print("* class doesn't exist **")
         return False
     return True
+
 
 def validated_show(arguments):
     """
@@ -43,6 +45,7 @@ def validated_show(arguments):
         print("* class doesn't exist **")
         return False
     return True
+
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -89,7 +92,7 @@ class HBNBCommand(cmd.Cmd):
         if not validated_show(args):
             return
         instance = storage.all()
-        key=f"{args[0]}.{args[1]}"
+        key = f"{args[0]}.{args[1]}"
         requested = instance.get(key)
         if requested is None:
             print("** no instance found **")
@@ -117,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
         args = line.split()
         instances = storage.all()
         if len(args) < 1:
-            print(["{}".format(str(dicky)) for x,dicky in instances.items()])
+            print(["{}".format(str(dicky)) for x, dicky in instances.items()])
             return
         if len(args) == 1:
             if args[0] not in current_classes.keys():
