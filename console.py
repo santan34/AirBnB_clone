@@ -26,7 +26,7 @@ def validated(arguments):
         print("** class name missing **")
         return False
     if arguments[0] not in current_classes:
-        print("* class doesn't exist **")
+        print("** class doesn't exist **")
         return False
     return True
 
@@ -42,7 +42,7 @@ def validated_show(arguments):
         print("** instance id missing **")
         return False
     if arguments[0] not in current_classes:
-        print("* class doesn't exist **")
+        print("** class doesn't exist **")
         return False
     return True
 
