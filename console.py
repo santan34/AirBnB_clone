@@ -31,6 +31,28 @@ def validated(arguments):
     return True
 
 
+def validated_up(arguments):
+    """
+    validates during show
+    """
+    if len(arguments) < 1:
+        print("** class name missing **")
+        return False
+    if len(arguments) < 2:
+        print("** instance id missing **")
+        return False
+    if arguments[0] not in current_classes:
+        print("** class doesn't exist **")
+        return False
+    if len(arguments) < 3:
+        print("** attribute name missing **")
+        return False
+    if len(arguments) < 4:
+        print(" ** value missing **")
+        return False
+    return True
+
+
 def validated_show(arguments):
     """
     validates during show
@@ -100,7 +122,7 @@ class HBNBCommand(cmd.Cmd):
         print(requested)
 
     def do_destroy(self, line):
-        """destorys an object"""
+        """destroys an object"""
         args = line.split()
         if not validated_show(args):
             return
@@ -130,6 +152,34 @@ class HBNBCommand(cmd.Cmd):
                 print(["{}".format(str(dicky))
                        for x, dicky in instances.items()
                        if args[0] == type(dicky).__name__])
+
+    def do_update(self, line):
+        """
+        Updates the json
+        usage "update <class name> <id> <attribute name> "<attribute value>
+        """
+        args = line.split()
+        so_far = storage.all()
+        if not validated_up(args):
+            return
+        key = f"{args[0]}.{args[1]}"
+        if key not in so_far:
+            print("** no instance found **")
+            return
+        to_update = so_far.get(key)
+        if (args[3][0] == "\"") or (args[3][0] == "\'"):
+            val = str(args[3])
+        else:
+            if "." in args[3]:
+                val = float(args[3])
+            else:
+                val = int(args[3])
+        a = to_update.to_dict()
+        a[args[2]] = val
+        ser_dict = {k: v.to_dict() for k, v in so_far.items()}
+        ser_dict[key] = a
+        with open("file.json", "w") as f:
+            json.dump(ser_dict, f)
 
 
 if __name__ == "__main__":
