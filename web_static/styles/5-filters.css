@@ -26,7 +26,6 @@
 .amenities {
   height: 100%;
   width: 25%;
-  border-right: #dddddd solid 1px;
   display: flex;
   padding-left: 20px;
   align-items: center;
